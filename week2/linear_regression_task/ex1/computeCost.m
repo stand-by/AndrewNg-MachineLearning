@@ -13,11 +13,15 @@ J = 0;
 % Instructions: Compute the cost of a particular choice of theta
 %               You should set J to the cost.
 
+% bad implementation
+%for i = 1:m
+%    J += (theta' * (X(i,:))' - y(i))^2;
+%end;
+%J = J/(2*m);
 
-for i = 1:m
-    J += (theta' * (X(i,:))' - y(i))^2;
-end;
-J = J/(2*m);
+% vectorization
+J = sum((X * theta - y).^2)/(2*m);
+
 
 % =========================================================================
 
