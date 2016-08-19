@@ -14,7 +14,8 @@ J = 0;
 %               You should set J to the cost.
 
 
-
+% vectorized form: J(theta) = (1/2m)(X theta - y)^t(X theta - y)
+J = (1/2*m)*(X*theta-y)'*(X*theta-y);  
 
 
 % =========================================================================
