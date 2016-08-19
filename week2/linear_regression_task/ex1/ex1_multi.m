@@ -50,6 +50,12 @@ pause;
 fprintf('Normalizing Features ...\n');
 
 [X mu sigma] = featureNormalize(X);
+fprintf('X design matrix after normalization: \n');
+disp(X);
+fprintf('mu vector: \n');
+disp(mu);
+fprintf('sigma vector: \n');
+disp(sigma);
 
 % Add intercept term to X
 X = [ones(m, 1) X];

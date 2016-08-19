@@ -26,13 +26,14 @@ sigma = zeros(1, size(X, 2));
 % Hint: You might find the 'mean' and 'std' functions useful.
 %       
 
-
-
-
-
-
-
-
+mu = mean(X);   % row-vector with X's column means
+sigma = std(X); % standard deviation for each column in a row vector
+% vectorization
+% [(x11-mu1)/sigma1 ... (xn1-mun)/sigman]
+% [...              ...              ...]
+% [(xm1-mu1)/sigma1 ... (xmx-mun)/sigman]
+X_norm = (X-(zeros(size(X)).+mu))./(zeros(size(X)).+sigma);
+%disp(X_norm)
 
 % ============================================================
 
