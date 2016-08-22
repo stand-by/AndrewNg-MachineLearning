@@ -17,13 +17,14 @@ for iter = 1:num_iters
     %       of the cost function (computeCostMulti) and gradient here.
     %
 
-    temp = zeros(size(theta));
-    for i=1:size(theta)
-        temp(i) = theta(i) - (alpha/m)*sum((X*theta-y).*X(:,i));
-    end
-    theta = temp;
+    %temp = zeros(size(theta));
+    %for i=1:size(theta)
+    %    temp(i) = theta(i) - (alpha/m)*sum((X*theta-y).*X(:,i));
+    %end
+    %theta = temp;
 
-
+    %vectorized code
+    theta = theta - (alpha/m)*X'*(X*theta-y);
 
 
 
