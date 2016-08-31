@@ -21,8 +21,14 @@ p = zeros(size(X, 1), 1);
 %       can use max(A, [], 2) to obtain the max for each row.
 %
 
-
-
+X = [ones(m, 1) X];
+for k=1:m,
+    a_1 = X(k,:)';
+    a_2 = sigmoid(Theta1*a_1);
+    a_2 = [1; a_2];
+    a_3 = sigmoid(Theta2*a_2);
+    [probability, p(k)] = max(a_3);
+end;
 
 
 
