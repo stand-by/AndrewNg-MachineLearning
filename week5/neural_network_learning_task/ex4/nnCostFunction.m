@@ -64,18 +64,33 @@ Theta2_grad = zeros(size(Theta2));
 
 %PART1
 %vectorized
-a1 = [ones(m, 1) X];
-a2 = sigmoid(a1 * Theta1');
-a2 = [ones(size(a2,1), 1) a2];
-a3 = sigmoid(a2 * Theta2');
-hThetaX = a3;
+%a1 = [ones(m, 1) X];
+%a2 = sigmoid(a1 * Theta1');
+%a2 = [ones(size(a2,1), 1) a2];
+%a3 = sigmoid(a2 * Theta2');
+%hThetaX = a3;
+%y_matr = zeros(m,num_labels);
+%for i = 1:m
+%    y_matr(i,y(i)) = 1;
+%end
+%J = 1/m * sum(sum(-1 * y_matr .* log(hThetaX)-(1-y_matr) .* log(1-hThetaX)));
+
 
 y_matr = zeros(m,num_labels);
 for i = 1:m
     y_matr(i,y(i)) = 1;
-end
-
-J = 1/m * sum(sum(-1 * y_matr .* log(hThetaX)-(1-y_matr) .* log(1-hThetaX)));
+end;
+X = [ones(m, 1) X];
+for i=1:m
+    a_1 = X(i,:)';
+    a_2 = sigmoid(Theta1*a_1);
+    a_2 = [1; a_2];
+    a_3 = sigmoid(Theta2*a_2);
+    for k=1:num_labels
+        J += -y_matr(i,k)*log(a_3(k))-(1-y_matr(i,k))*log(1-a_3(k));
+    end;
+end;
+J = J/m;
 
 regularization = (lambda/(2*m))*(sum(sum(Theta1(:,2:end).^2)) + sum(sum(Theta2(:,2:end).^2)));
 J += regularization;
