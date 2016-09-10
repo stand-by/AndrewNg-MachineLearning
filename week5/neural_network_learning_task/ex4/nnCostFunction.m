@@ -62,12 +62,23 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+%PART1
+%vectorized
+a1 = [ones(m, 1) X];
+a2 = sigmoid(a1 * Theta1');
+a2 = [ones(size(a2,1), 1) a2];
+a3 = sigmoid(a2 * Theta2');
+hThetaX = a3;
 
+y_matr = zeros(m,num_labels);
+for i = 1:m
+    y_matr(i,y(i)) = 1;
+end
 
+J = 1/m * sum(sum(-1 * y_matr .* log(hThetaX)-(1-y_matr) .* log(1-hThetaX)));
 
-
-
-
+regularization = (lambda/(2*m))*(sum(sum(Theta1(:,2:end).^2)) + sum(sum(Theta2(:,2:end).^2)));
+J += regularization;
 
 
 
