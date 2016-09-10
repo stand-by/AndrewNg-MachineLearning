@@ -91,20 +91,36 @@ for i=1:m
     end;
 end;
 J = J/m;
-
 regularization = (lambda/(2*m))*(sum(sum(Theta1(:,2:end).^2)) + sum(sum(Theta2(:,2:end).^2)));
 J += regularization;
 
 
+%PART2
+delta_acc = zeros(2,2);
+delta_3 = zeros(num_labels,1); 
+delta_acc_2 = zeros(num_labels, hidden_layer_size+1); 
+delta_2 = zeros(hidden_layer_size,1);
+delta_acc_1 = zeros(hidden_layer_size, size(X,2)); 
+for t=1:m
+    a_1 = X(t,:)';
+    z_2 = Theta1*a_1;
+    a_2 = sigmoid(z_2);
+    a_2 = [1; a_2];
+    z_3 = Theta2*a_2;
+    a_3 = sigmoid(z_3);
 
+    delta_3 = a_3 - y_matr(t,:)';
+    delta_2 = Theta2'*delta_3.*[1; sigmoidGradient(z_2)];
+    delta_2 = delta_2(2:end);
 
+    %l=1
+    delta_acc_1 = delta_acc_1+(delta_2*a_1');
+    %l=2
+    delta_acc_2 = delta_acc_2+(delta_3*a_2');
+end;
 
-
-
-
-
-
-
+Theta1_grad = (delta_acc_1)/m;
+Theta2_grad = (delta_acc_2)/m;
 
 % -------------------------------------------------------------
 
