@@ -218,3 +218,11 @@ end
 
 fprintf('Program paused. Press enter to continue.\n');
 pause;
+
+%Optional (ungraded) exercise: Computing test set error
+test_error = 0.0;
+perfect_lambda = 3.0; 
+[theta] = trainLinearReg(X_poly, y, perfect_lambda);
+test_error = linearRegCostFunction(X_poly_test, ytest, theta, 0);
+fprintf('Test error (not CV) using test set with selected lambda=%f is ', perfect_lambda);
+disp(test_error);
